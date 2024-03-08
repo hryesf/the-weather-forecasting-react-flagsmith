@@ -130,7 +130,6 @@ function App() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    {/*<WeeklyForecast data={weekForecast}/>*/}
                     {weeklyForecastComponent}
                 </Grid>
             </React.Fragment>
