@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import flagsmith from "flagsmith";
 import {Box, Container, Grid, Link, SvgIcon, Typography} from '@mui/material';
 import Search from './components/Search/Search';
 import WeeklyForecast from './components/WeeklyForecast/WeeklyForecast';
@@ -16,6 +17,7 @@ import {
     getTodayForecastWeather,
     getWeekForecastWeather,
 } from './utilities/DataUtils';
+
 
 function App() {
     const [todayWeather, setTodayWeather] = useState(null);
@@ -98,17 +100,39 @@ function App() {
 
     if (todayWeather && todayForecast && weekForecast) {
 
-        let isEnabled = false;
-        let weeklyForecastComponent;
+        /*let weeklyForecastComponent;
 
-        if (isEnabled) {
-            weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
-        } else {
-            weeklyForecastComponent = <p style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}>
-                You are not able to see Weekly Forecast
-            </p>;
+        flagsmith.init({
+            environmentID: "8YgACwjXK9jVYsVmozFzQo",
+            onChange: (oldFlags, params) => {
+                if (flagsmith.hasFeature('show_demo_button')) {
+                    weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
+                } else {
+                    weeklyForecastComponent = <p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
+                        You are not able to see Weekly Forecast
+                    </p>;
 
-        }
+
+                }
+            },
+        }).catch((error) => {
+            console.error('Error fetching feature flag:', error);
+        });*/
+
+        useEffect(() => {
+            flagsmith.init({
+                environmentID: '8YgACwjXK9jVYsVmozFzQo',
+                apiKey: 'YOUR_API_KEY',
+            });
+
+            flagsmith.getFeatureFlags()
+                .then(flags => {
+                    setIsWeeklyForecastEnabled(flags.show_demo_button); // Assuming 'show_demo_button' is your feature flag key
+                })
+                .catch(error => {
+                    console.error('Error fetching feature flag:', error);
+                });
+        }, []);
 
         appContent = (
             <React.Fragment>
