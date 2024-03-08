@@ -122,21 +122,6 @@ function App() {
             console.error('Error fetching feature flag:', error);
         });
 
-        /*useEffect(() => {
-            flagsmith.init({
-                environmentID: '8YgACwjXK9jVYsVmozFzQo',
-                apiKey: 'YOUR_API_KEY',
-            });
-
-            flagsmith.getFeatureFlags()
-                .then(flags => {
-                    setIsWeeklyForecastEnabled(flags.show_demo_button); // Assuming 'show_demo_button' is your feature flag key
-                })
-                .catch(error => {
-                    console.error('Error fetching feature flag:', error);
-                });
-        }, []);*/
-
         appContent = (
             <React.Fragment>
                 <Grid item xs={12} md={todayWeather ? 6 : 12}>
