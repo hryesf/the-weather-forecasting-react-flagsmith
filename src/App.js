@@ -100,7 +100,7 @@ function App() {
 
     if (todayWeather && todayForecast && weekForecast) {
 
-        /*let weeklyForecastComponent;
+        let weeklyForecastComponent;
 
         flagsmith.init({
             environmentID: "8YgACwjXK9jVYsVmozFzQo",
@@ -117,9 +117,9 @@ function App() {
             },
         }).catch((error) => {
             console.error('Error fetching feature flag:', error);
-        });*/
+        });
 
-        useEffect(() => {
+        /*useEffect(() => {
             flagsmith.init({
                 environmentID: '8YgACwjXK9jVYsVmozFzQo',
                 apiKey: 'YOUR_API_KEY',
@@ -132,7 +132,7 @@ function App() {
                 .catch(error => {
                     console.error('Error fetching feature flag:', error);
                 });
-        }, []);
+        }, []);*/
 
         appContent = (
             <React.Fragment>
