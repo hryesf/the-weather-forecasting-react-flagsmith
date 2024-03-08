@@ -102,9 +102,11 @@ function App() {
 
         let weeklyForecastComponent;
 
+        console.log('Initializing flagsmith...');
         flagsmith.init({
             environmentID: "8YgACwjXK9jVYsVmozFzQo",
             onChange: (oldFlags, params) => {
+                console.log('Fetching feature flags from environmentID: "8YgACwjXK9jVYsVmozFzQo"...');
                 if (flagsmith.hasFeature('show_demo_button')) {
                     weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
                 } else {
@@ -114,6 +116,7 @@ function App() {
 
 
                 }
+                console.log('Successfully fetched feature flags.');
             },
         }).catch((error) => {
             console.error('Error fetching feature flag:', error);
