@@ -101,8 +101,6 @@ function App() {
 
     if (todayWeather && todayForecast && weekForecast) {
 
-        let isEnabled = false;
-
         console.log('Initializing flagsmith...');
         flagsmith.init({
             environmentID: "8YgACwjXK9jVYsVmozFzQo",
@@ -110,15 +108,12 @@ function App() {
                 console.log('Fetching feature flags from environmentID: "8YgACwjXK9jVYsVmozFzQo"...');
                 if (flagsmith.hasFeature('show_demo_button')) {
                     setWeeklyForecastComponent(<WeeklyForecast data={weekForecast}/>);
-                    isEnabled = true;
                     console.log("You are able to see Weekly Forecast");
-                    console.log(isEnabled);
                 } else {
                     setWeeklyForecastComponent(<p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
                         You are not able to see Weekly Forecast
                     </p>);
                     console.log("You are not able to see Weekly Forecast");
-                    console.log(isEnabled);
                 }
                 console.log('Successfully fetched feature flags.');
             },
