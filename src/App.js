@@ -101,6 +101,7 @@ function App() {
     if (todayWeather && todayForecast && weekForecast) {
 
         let weeklyForecastComponent;
+        let isEnabled = false;
 
         console.log('Initializing flagsmith...');
         flagsmith.init({
@@ -108,19 +109,33 @@ function App() {
             onChange: (oldFlags, params) => {
                 console.log('Fetching feature flags from environmentID: "8YgACwjXK9jVYsVmozFzQo"...');
                 if (flagsmith.hasFeature('show_demo_button')) {
-                    weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
+                    // weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
+                    isEnabled = true;
                     console.log("You are able to see Weekly Forecast");
+                    console.log(isEnabled);
                 } else {
                     weeklyForecastComponent = <p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
                         You are not able to see Weekly Forecast
                     </p>;
                     console.log("You are not able to see Weekly Forecast");
+                    console.log(isEnabled);
                 }
                 console.log('Successfully fetched feature flags.');
             },
         }).catch((error) => {
             console.error('Error fetching feature flag:', error);
         });
+
+        console.log("button value", flagsmith.hasFeature('show_demo_button').valueOf())
+        if (flagsmith.hasFeature('show_demo_button')) {
+            weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
+            console.log("is Enabled");
+        } else {
+            weeklyForecastComponent = <p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
+                You are not able to see Weekly Forecast
+            </p>;
+            console.log("is not Enabled");
+        }
 
         appContent = (
             <React.Fragment>
