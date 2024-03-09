@@ -126,16 +126,6 @@ function App() {
             console.error('Error fetching feature flag:', error);
         });
 
-        /*console.log("button value", flagsmith.hasFeature('show_demo_button').valueOf())
-        if (flagsmith.hasFeature('show_demo_button')) {
-            weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
-            console.log("is Enabled");
-        } else {
-            weeklyForecastComponent = <p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
-                You are not able to see Weekly Forecast
-            </p>;
-            console.log("is not Enabled");
-        }*/
 
         appContent = (
             <React.Fragment>
