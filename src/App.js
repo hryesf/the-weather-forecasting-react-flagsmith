@@ -104,16 +104,19 @@ function App() {
         console.log('Initializing flagsmith...');
         flagsmith.init({
             environmentID: "8YgACwjXK9jVYsVmozFzQo",
+
             onChange: (oldFlags, params) => {
                 console.log('Fetching feature flags from environmentID: "8YgACwjXK9jVYsVmozFzQo"...');
+
                 if (flagsmith.hasFeature('show_demo_button')) {
                     setWeeklyForecastComponent(<WeeklyForecast data={weekForecast}/>);
-                    console.log("You are able to see Weekly Forecast");
+                    console.log("Flag is Enabled");
+
                 } else {
                     setWeeklyForecastComponent(<p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
                         You are not able to see Weekly Forecast
                     </p>);
-                    console.log("You are not able to see Weekly Forecast");
+                    console.log("Flag is Disabled");
                 }
                 console.log('Successfully fetched feature flags.');
             },
