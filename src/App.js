@@ -20,6 +20,7 @@ import {
 
 
 function App() {
+    const [weeklyForecastComponent, setWeeklyForecastComponent] = useState(null);
     const [todayWeather, setTodayWeather] = useState(null);
     const [todayForecast, setTodayForecast] = useState([]);
     const [weekForecast, setWeekForecast] = useState(null);
@@ -100,7 +101,6 @@ function App() {
 
     if (todayWeather && todayForecast && weekForecast) {
 
-        let weeklyForecastComponent;
         let isEnabled = false;
 
         console.log('Initializing flagsmith...');
@@ -109,14 +109,14 @@ function App() {
             onChange: (oldFlags, params) => {
                 console.log('Fetching feature flags from environmentID: "8YgACwjXK9jVYsVmozFzQo"...');
                 if (flagsmith.hasFeature('show_demo_button')) {
-                    // weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
+                    setWeeklyForecastComponent(<WeeklyForecast data={weekForecast}/>);
                     isEnabled = true;
                     console.log("You are able to see Weekly Forecast");
                     console.log(isEnabled);
                 } else {
-                    weeklyForecastComponent = <p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
+                    setWeeklyForecastComponent(<p style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}>
                         You are not able to see Weekly Forecast
-                    </p>;
+                    </p>);
                     console.log("You are not able to see Weekly Forecast");
                     console.log(isEnabled);
                 }
@@ -126,7 +126,7 @@ function App() {
             console.error('Error fetching feature flag:', error);
         });
 
-        console.log("button value", flagsmith.hasFeature('show_demo_button').valueOf())
+        /*console.log("button value", flagsmith.hasFeature('show_demo_button').valueOf())
         if (flagsmith.hasFeature('show_demo_button')) {
             weeklyForecastComponent = <WeeklyForecast data={weekForecast}/>;
             console.log("is Enabled");
@@ -135,7 +135,7 @@ function App() {
                 You are not able to see Weekly Forecast
             </p>;
             console.log("is not Enabled");
-        }
+        }*/
 
         appContent = (
             <React.Fragment>
